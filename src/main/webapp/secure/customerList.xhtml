@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="content">
+        <ui:define name="subheader">#{msgs['cif.natural.customer.list']}</ui:define>
+
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect ui-fluid rtl-dir">
+
+
+                    <p:fieldset legend="#{msgs['Search']}" styleClass="ui-fieldset">
+
+                        <h:form id="customerSearchForm">
+                            <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                                <ui:define name="label">#{msgs['First_Name']}</ui:define>
+                                <p:inputText value="#{customerQuery.customerFilter.name}"></p:inputText>
+                            </ui:decorate>
+
+                            <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                                <ui:define name="label">#{msgs['Last_Name']}</ui:define>
+                                <p:inputText value="#{customerQuery.customerFilter.family}"></p:inputText>
+                            </ui:decorate>
+
+                            <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                                <ui:define name="label">#{msgs['National_No']}</ui:define>
+                                <p:inputText value="#{customerQuery.customerFilter.nationalCode}"></p:inputText>
+                            </ui:decorate>
+
+                            <div class="row gutters">
+                                <p:panelGrid columns="2" layout="grid"
+                                             styleClass="ui-panelgrid-blank">
+
+                                    <p:commandButton value="#{msgs['Search']}" styleClass="button small md-button ripplelink"
+                                                     update="@form :customerListForm:customerListTable"
+                                                     action="#{customerQuery.resetPagination('customerListForm:customerListTable')}"></p:commandButton>
+                                    <p:commandButton value="#{msgs['Reset']}" styleClass="button secondary small"
+                                                     update="@form :customerListForm:customerListTable"
+                                                     action="#{customerQuery.resetSearch()}"></p:commandButton>
+                                </p:panelGrid></div>
+                        </h:form>
+
+                    </p:fieldset>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <div class="Container100">
+                        <div class="ContainerIndent">
+
+                            <h:form id="customerListForm">
+                                <p:dataTable var="_item"
+                                             value="#{customerQuery.resultList}"
+
+                                             rowsPerPageTemplate="50,100"
+                                             dir="rtl"
+                                             sortBy="#{_item.createdDate}"
+                                             rowIndexVar="rowId"
+                                             emptyMessage="#{msgs['Empty_Datatable']}"
+                                             paginator="true"
+                                             rows="50"
+                                             id="customerListTable"
+                                             lazy="true"
+                                             sortMode="multiple"
+                                             styleClass="ui celled striped table"
+                                             rowStyleClass="center aligned"
+                                             rowKey="#{_item.id}"
+                                             reflow="true">
+
+
+                                    <f:facet name="footer">
+                                        <h:outputText value="#{msgs['Total_Records']}"></h:outputText> #{' '} <h:outputText value=" ( #{customerQuery.resultCount} )"></h:outputText>
+                                    </f:facet>
+
+
+                                    <p:column headerText="#{msgs['National_No']}">
+                                        <p:link href="/secure/customerEdit.xhtml?customerId=#{_item.id}" value="#{_item.nationalCode}" styleClass="w3-text-blue"  />
+                                    </p:column>
+
+                                    <p:column headerText="#{msgs['Full_Name']}">
+                                        <h:outputText value="#{_item.name} - #{_item.family}"></h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="#{msgs['Birth_Date']}">
+                                        <h:outputText value="#{_item.birthDate}" converter="#{jalaliConverter}"></h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="#{msgs['Gender']}">
+                                        <h:outputText value="#{msgs[_item.gender]}"></h:outputText>
+                                    </p:column>
+
+
+                                </p:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+

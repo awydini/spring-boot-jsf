@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+
+	<!-- Navbar -->
+	<ul class="w3-navbar w3-indigo w3-card-2 w3-top w3-left-align w3-large">
+		<li class="w3-hide-medium w3-hide-large w3-opennav w3-right"><a
+			class="w3-padding-menu-item w3-hover-white w3-large w3-green"
+			href="javascript:void(0);" onclick="navViewport()"
+			title="Toggle Navigation Menu"><i class="fa fa-windows"></i></a></li>
+
+
+		<ui:fragment
+				rendered="#{sec:areAnyGranted('ROLE_ADMIN')}">
+		<li><a href="#{_ctx}/secure/customerList" onclick="w3_close()"
+				class="w3-bar-item w3-button w3-hover-white">#{msgs['Home']}</a></li>
+
+
+
+
+		<li class="w3-hide-small w3-dropdown-hover"><a
+				title="#{msgs['cif.menu.title']}" class="w3-padding-menu-item w3-hover-white"
+				href="javascript:void(0);"> <h:outputText value="#{msgs['cif.menu.title']}" />
+			<i class="fa fa-arrow-down"></i>
+		</a>
+
+			<div class="w3-dropdown-content w3-white w3-card-4">
+
+				<a href="#{_ctx}/secure/customerEdit" onclick="w3_close()">#{msgs['cif.menu.create.title']}</a>
+				<a href="#{_ctx}/secure/merchants/features/featureList" onclick="w3_close()">#{msgs['cif.menu.create.batch.title']}</a>
+
+
+			</div></li>
+
+
+		</ui:fragment>
+
+
+		<li class="w3-hide-small"><c:if
+				test="#{!securityBean.loggedIn or securityBean.anonymous}">
+				<a href="#{_ctx}/login" onclick="w3_close()"
+					class="w3-bar-item w3-button w3-hover-white">#{msgs['Login']}</a>
+			</c:if> <c:if test="#{securityBean.loggedIn and !securityBean.anonymous}">
+				<a href="#{_ctx}/logout" onclick="w3_close()"
+					class="w3-bar-item w3-button w3-hover-white">#{msgs['Logout']}</a>
+			</c:if></li>
+
+
+
+
+	</ul>
+
+	<!-- Navbar on small screens -->
+	<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top"
+		style="margin-top: 51px; z-index: 9999">
+		<ul class="w3-navbar w3-right-align w3-large w3-black">
+
+			<li><a href="#{_ctx}/secure/dashboard"
+				onclick="w3_close()" class="w3-padding-menu-item">dashboard</a>
+
+			</li>
+
+
+		</ul>
+	</div>
+
+
+
+	<script>
+		// Used to toggle the menu on small screens when clicking on the menu button
+		function navViewport() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace("w3-show", "");
+			}
+		}
+
+		jQuery(document).ready(function() {
+			jQuery("a.w3-bar-item.w3-button").each(function(i, item) {
+				if (item.href == window.location)
+					jQuery(this).addClass("w3-blue-grey");
+			});
+		});
+	</script>
+</ui:composition>
+

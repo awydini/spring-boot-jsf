@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" lang="fa">
+	
+<f:view contentType="text/html" encoding="UTF-8" locale="fa">
+	<c:set var="_ctx" value="#{request.contextPath}" />
+	<c:set var="from" value="#{param['from']}" />
+
+
+
+	<h:head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+		<title>
+		ماپرا  <h:outputText value="#{' '}" /> 
+		<h:outputText value="#{messages['Application_Name']}" rendered="#{empty _title}"/>
+		<h:outputText value="#{_title}" rendered="#{not empty _title}"/>
+		
+		</title>
+
+
+		<h:outputScript library="primefaces" name="jquery/jquery.js"
+			target="head" />
+
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
+			target="head" />
+
+
+
+
+	</h:head>
+	<h:body>
+		
+
+		
+	</h:body>
+
+</f:view>
+</html>

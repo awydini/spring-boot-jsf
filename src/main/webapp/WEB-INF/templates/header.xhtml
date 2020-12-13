@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:fragment rendered="#{not empty securityBean.currentUser}">
+
+
+		<div class="w3-panel w3-light-grey w3-padding rtl-dir">
+		<div class="row gutters auto">
+			<div class="col">
+				<h:outputText value="#{msgs['User_Name']}"></h:outputText>
+				#{' : '}
+				<h:outputText value="#{securityBean.currentUser.username}"></h:outputText>
+			</div>
+			<div class="col">
+				<h:outputText value="#{msgs['Role']}"></h:outputText>
+				#{' : '}
+				<h:outputText value="#{securityBean.currentUser.roleNames}"></h:outputText>
+			</div>
+			<div class="col">
+				<h:outputText value="#{msgs['Last_Login']}"></h:outputText>
+				#{' : '}
+				<h:outputText value="#{securityBean.lastLogin}"
+					converter="#{jalaliDateConverter}">
+					<f:attribute name="showTime" value="true" />
+				</h:outputText>
+			</div>
+		</div>
+
+
+</div>		
+
+
+	</ui:fragment>
+</ui:composition>
+

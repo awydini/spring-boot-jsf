@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layout.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		<c:if test="#{securityBean.loggedIn and !securityBean.anonymous}">
+			<div style="display:none">
+			<h:button  id="submit" value="Submit" outcome="/secure/dashboard?faces-redirect=true" />
+			</div>
+			<script>
+				jQuery(document).ready(function(){
+					jQuery("#submit").click();
+				});
+			</script>
+		</c:if>
+		<c:if test="#{!securityBean.loggedIn or securityBean.anonymous}">
+		<div class="span-10 append-2 last"> 		
+			<c:if test="${not empty param.error}">
+				<div class="error dir-rtl">
+					#{msgs['Login_Failed']}<br />
+					#{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
+				</div>
+			</c:if>
+			<form name="f" action="${request.contextPath}/loginProcess"
+				method="post">
+				<fieldset>
+					<legend>#{msgs['Login']}</legend>
+					<p>
+						#{msgs['Username']}: <br />
+						<c:if test="${not empty param.login_error}">
+							<c:set var="username"
+								value="${sessionScope.SPRING_SECURITY_LAST_USERNAME}" />
+						</c:if>
+						<input type="text" name="username" value="#{username}" />
+					</p>
+					<p>
+						#{msgs['Password']}: <br /> <input type="password" name="password" />
+					</p>
+					<p>
+						<input name="submit" type="submit" value="#{msgs['Login']}" />
+					</p>
+				</fieldset>
+			</form>
+		</div>
+		</c:if>
+
+	</ui:define>
+
+</ui:composition>
+

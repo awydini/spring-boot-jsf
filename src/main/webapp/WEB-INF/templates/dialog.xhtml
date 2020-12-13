@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	lang="fa">
+<f:view contentType="text/html" encoding="UTF-8" locale="fa">
+	<c:set var="_ctx" value="#{request.contextPath}" />
+	<c:set var="from" value="#{param['from']}" />
+
+	<ui:insert name="metadata" />
+
+	<h:head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title><h:outputText value="#{msgs['Application_Name']}" /></title>
+		
+		<h:outputStylesheet library="css" name="primefaces-omega.css"  />
+		<h:outputStylesheet library="css" name="w3.css"  />
+		<h:outputStylesheet library="css" name="w3-blue-grey.css"  />
+		<h:outputStylesheet library="css" name="semantic.min.css"  />
+		<h:outputStylesheet library="css" name="kube.css"  />
+		
+		
+		
+		
+		
+		<h:outputStylesheet library="css" name="webapp.css"  />
+
+		<h:outputScript library="primefaces" name="jquery/jquery.js"
+			target="head" />
+		
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
+			target="head" />
+		
+		<h:outputScript library="js" name="semantic.min.js"
+			target="head" />	
+			
+		<h:outputScript library="js" name="common.js"
+			target="head" />	
+
+		<ui:insert name="head" />
+		
+	</h:head>
+	<h:body>
+
+		<p:growl id="globalGrowl" widgetVar="globalGrowlWidget"
+			showDetail="true" sticky="true" globalOnly="true" />
+
+		<ui:insert name="content"></ui:insert>
+		
+		<div class="ui page dimmer" id="dimmerLoader">
+			<div class="ui text loader">#{messages['Loading']}</div>
+		</div>
+		
+		<p:ajaxStatus onstart="common.showLoading()" oncomplete="common.hideLoading()" ></p:ajaxStatus>
+		
+		
+		<script>
+			jQuery(document).ready(function(){
+				jQuery("a.ui-dialog-titlebar-icon").click(function(){
+					PrimeFaces.closeDialog({pfdlgcid:'#{param.pfdlgcid}'})
+				});
+			});
+		</script>
+
+
+	</h:body>
+
+</f:view>
+</html>

@@ -1,0 +1,6 @@
+2020-12-14 01:07:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMER" already exists; SQL statement:
+create table customer (id bigint not null, created_date timestamp, deleted_date timestamp, updated_date timestamp, version integer DEFAULT 0, birth_date timestamp, family varchar(255), gender varchar(255), name varchar(255), national_code varchar(255), primary key (id)) [42101-196]
+2020-12-14 01:09:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMER" already exists; SQL statement:
+create table customer (id bigint not null, created_date timestamp, deleted_date timestamp, updated_date timestamp, version integer DEFAULT 0, birth_date timestamp, family varchar(255), gender varchar(255), name varchar(255), national_code varchar(255), primary key (id)) [42101-196]

@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="customerId" value="#{customerHome.customerId}" converter="javax.faces.Long" />
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="customerEditForm">
+            <fieldset>
+                <legend>#{msgs['Customer']}
+                    <h:outputText rendered="#{not empty customerHome.customerId}" value="#{customerHome.instance.fullName}"></h:outputText>
+                    <h:outputText rendered="#{empty customerHome.customerId}" value="#{msgs['New']}"></h:outputText>
+                </legend>
+
+                <div class="row gutters">
+
+                    <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                        <ui:define name="label">#{msgs['First_Name']}</ui:define>
+                        <p:inputText value="#{customerHome.instance.name}" id="fname" required="true" maxlength="15"></p:inputText>
+                        <ui:param name="required" value="true"></ui:param>
+                        <ui:define name="msg">
+                            <p:message for="fname"></p:message>
+                        </ui:define>
+                    </ui:decorate>
+
+                    <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                        <ui:define name="label">#{msgs['Last_Name']}</ui:define>
+                        <p:inputText value="#{customerHome.instance.family}" id="lname" required="true" maxlength="30"></p:inputText>
+                        <ui:param name="required" value="true"></ui:param>
+                        <ui:define name="msg">
+                            <p:message for="lname"></p:message>
+                        </ui:define>
+                    </ui:decorate>
+
+                </div>
+
+                <div class="row gutters">
+
+                    <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                        <ui:define name="label">#{msgs['National_No']}</ui:define>
+                        <p:inputText value="#{customerHome.instance.nationalCode}" id="nn" required="true"  maxlength="10">
+                            <f:validator binding="#{nationalCodeValidator}" />
+                            <f:attribute name = "customerId" value = "#{customerHome.instance.id}" />
+                        </p:inputText>
+                        <ui:param name="required" value="true" ></ui:param>
+                        <ui:define name="msg">
+                            <p:message for="nn"></p:message>
+                        </ui:define>
+                    </ui:decorate>
+
+                    <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                        <ui:define name="label">#{msgs['Birth_Date']}</ui:define>
+                        <p:calendar id="bdate" required="true" value="#{customerHome.instance.birthDate}" ></p:calendar>
+                        <ui:define name="msg">
+                            <p:message for="bdate"></p:message>
+                        </ui:define>
+                    </ui:decorate>
+                </div>
+
+                <ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+                    <ui:define name="label">#{msgs['Gender']}</ui:define>
+                    <h:selectOneMenu value="#{customerHome.instance.gender}" required="true" id="gender">
+                        <f:selectItem  itemLabel="-- #{msgs['Please_Select']} --" noSelectionOption="true"/>
+                        <f:selectItems value="#{customerHome.genders}" var="_ce"
+                                       itemLabel="#{msgs[_ce]}" itemValue="#{_ce}" />
+                    </h:selectOneMenu>
+                    <ui:define name="msg">
+                        <p:message for="gender"></p:message>
+                    </ui:define>
+                </ui:decorate>
+
+
+                <h:commandButton value="#{msgs['Save']}" styleClass="button green w3-margin"	rendered="#{!customerHome.idDefined}"
+                                 action="#{customerHome.persist()}"></h:commandButton>
+
+                <h:commandButton value="#{msgs['Update']}" styleClass="button yellow w3-margin" rendered="#{customerHome.idDefined}"
+                                 action="#{customerHome.merge()}"></h:commandButton>
+
+                <h:commandButton value="#{msgs['Delete']}" styleClass="button red w3-margin "	rendered="#{customerHome.idDefined}"
+                                 action="#{customerHome.remove()}"></h:commandButton>
+
+                <p:button href="/secure/customerList.xhtml" value="#{msgs['Back']}" styleClass="button secondary"></p:button>
+
+
+            </fieldset>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+
