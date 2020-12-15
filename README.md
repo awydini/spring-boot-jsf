@@ -26,6 +26,13 @@ simple project to illustrate customer information file web application, using  s
 
 ## Login details
 
- - [Login page](localhost:8585/login)
+ - [Login page](http://localhost:8585/login)
  - username : admin
  - password : 123
+
+## Access h2 console
+
+ - [Login page](http://localhost:8585/h2db)
+ - JDBC URL : jdbc:h2:./cif
+ - username : aydin
+ - password : aydin
