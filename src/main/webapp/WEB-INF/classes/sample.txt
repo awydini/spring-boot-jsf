@@ -1,0 +1,2 @@
+##name,family,national code,Gender:M/F,birth date (10 characters)
+آیدین,نصراله پور,0012700029,M,1369-08-25

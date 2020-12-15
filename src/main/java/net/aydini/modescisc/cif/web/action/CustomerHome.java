@@ -14,7 +14,7 @@ import net.aydini.modescisc.cif.domain.Gender;
 import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
 import net.aydini.modescisc.cif.exception.ServiceException;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
-import net.aydini.modescisc.cif.service.impl.CustomerCrudService;
+import net.aydini.modescisc.cif.service.impl.CustomerService;
 import net.aydini.modescisc.cif.util.SpringUtils;
 import net.aydini.modescisc.cif.web.action.framework.AbstractHomeActionBean;
 import net.aydini.modescisc.cif.web.action.framework.SpringViewScope;
@@ -36,10 +36,10 @@ public class CustomerHome extends AbstractHomeActionBean<CustomerEntity>
      * 
      */
     private static final long serialVersionUID = -7570746194832889030L;
-    private final CustomerCrudService customerService;
+    private final CustomerService customerService;
 
     @Autowired
-    public CustomerHome(CustomerCrudService customerService) {
+    public CustomerHome(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -93,7 +93,7 @@ public class CustomerHome extends AbstractHomeActionBean<CustomerEntity>
     {
         try
         {
-            customerService.delete(getCustomerId());
+            customerService.deleteSoft(getCustomerId());
             String msg = messageSource.getMessage("Successfully_deleted", null, getCurrentLocale());
             getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
             getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

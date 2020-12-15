@@ -24,7 +24,7 @@ public class ServiceException extends RuntimeException {
         this.args=args;
     }
 
-    public ServiceException(String message,Object[] args)
+    public ServiceException(String message,Object ... args)
     {
         super(message);
         this.args=args;

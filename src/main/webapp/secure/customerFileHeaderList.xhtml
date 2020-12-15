@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layout.xhtml">
+
+	<ui:define name="content">
+		<ui:define name="subheader">#{msgs['cif.natural.customer.list']}</ui:define>
+
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect ui-fluid rtl-dir">
+
+
+					<p:fieldset legend="#{msgs['Search']}" styleClass="ui-fieldset">
+
+						<h:form id="customerSearchForm">
+							<ui:decorate template="/WEB-INF/templates/sameLineEdit.xhtml">
+								<ui:define name="label">#{msgs['cif.batch.file.name']}</ui:define>
+								<p:inputText value="#{customerFileHeaderQuery.filter.fileName}"></p:inputText>
+							</ui:decorate>
+
+							<div class="row gutters">
+								<p:panelGrid columns="2" layout="grid"
+									styleClass="ui-panelgrid-blank">
+
+									<p:commandButton value="#{msgs['Search']}"
+										styleClass="button small md-button ripplelink"
+										update="@form :customerFileListForm:customerFileListTable"
+										action="#{customerFileHeaderQuery.resetPagination('customerFileListForm:customerFileListTable')}"></p:commandButton>
+									<p:commandButton value="#{msgs['Reset']}"
+										styleClass="button secondary small"
+										update="@form :customerFileListForm:customerFileListTable"
+										action="#{customerFileHeaderQuery.resetSearch()}"></p:commandButton>
+								</p:panelGrid>
+							</div>
+						</h:form>
+
+					</p:fieldset>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="Card ShadowEffect  ">
+					<div class="Container100">
+						<div class="ContainerIndent">
+
+							<h:form id="customerFileListForm">
+								<p:dataTable var="_item"
+									value="#{customerFileHeaderQuery.resultList}"
+									rowsPerPageTemplate="50,100" dir="rtl"
+									sortBy="#{_item.createdDate}" rowIndexVar="rowId"
+									emptyMessage="#{msgs['Empty_Datatable']}" paginator="true"
+									rows="50" id="customerFileListTable" lazy="true"
+									sortMode="multiple" styleClass="ui celled striped table"
+									rowStyleClass="center aligned" rowKey="#{_item.id}"
+									reflow="true">
+
+
+									<f:facet name="footer">
+										<h:outputText value="#{msgs['Total_Records']}"></h:outputText> #{' '} <h:outputText
+											value=" ( #{customerFileHeaderQuery.resultCount} )"></h:outputText>
+									</f:facet>
+
+
+									<p:column headerText="#{msgs['cif.batch.file.name']}">
+										<p:link
+											href="/secure/customerFileHeaderEdit.xhtml?id=#{_item.id}"
+											value="#{_item.fileName}" styleClass="w3-text-blue" />
+									</p:column>
+
+
+									<p:column headerText="#{msgs['cif.batch.file.created.date']}">
+										<h:outputText value="#{_item.createdDate}"
+											converter="#{jalaliConverter}"></h:outputText>
+									</p:column>
+
+									<p:column headerText="#{msgs['cif.batch.file.processed.date']}">
+										<h:outputText value="#{_item.processDate}"
+											converter="#{jalaliConverter}"></h:outputText>
+									</p:column>
+
+
+									<p:column headerText="#{msgs['cif.batch.file.total.record']}">
+										<h:outputText value="#{_item.totalRow}"></h:outputText>
+									</p:column>
+
+
+									<p:column headerText="#{msgs['cif.batch.file.total.record']}">
+										<h:outputText value="#{_item.totalRow}"></h:outputText>
+									</p:column>
+
+
+								</p:dataTable>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+

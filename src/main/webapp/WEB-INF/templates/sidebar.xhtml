@@ -33,9 +33,19 @@
 			<div class="w3-dropdown-content w3-white w3-card-4">
 
 				<a href="#{_ctx}/secure/customerEdit" onclick="w3_close()">#{msgs['cif.menu.create.title']}</a>
-				<a href="#{_ctx}/secure/merchants/features/featureList" onclick="w3_close()">#{msgs['cif.menu.create.batch.title']}</a>
+				<a href="#{_ctx}/secure/customerList" onclick="w3_close()">#{msgs['cif.menu.list']}</a>
+			</div></li>
+			
+			
+			<li class="w3-hide-small w3-dropdown-hover"><a
+				title="#{msgs['cif.menu.file']}" class="w3-padding-menu-item w3-hover-white"
+				href="javascript:void(0);"> <h:outputText value="#{msgs['cif.menu.file']}" />
+			<i class="fa fa-arrow-down"></i>
+		</a>
 
-
+			<div class="w3-dropdown-content w3-white w3-card-4">
+				<a href="#{_ctx}/secure/customerFileEdit" onclick="w3_close()">#{msgs['cif.menu.create.batch.title']}</a>
+				<a href="#{_ctx}/secure/customerFileList" onclick="w3_close()">#{msgs['cif.menu.file.list']}</a>
 			</div></li>
 
 

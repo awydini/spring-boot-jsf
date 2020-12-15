@@ -9,7 +9,7 @@ import net.aydini.modescisc.cif.domain.dto.filter.CustomerFilter;
 import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
 import net.aydini.modescisc.cif.service.framework.JPARestriction;
-import net.aydini.modescisc.cif.service.impl.CustomerCrudService;
+import net.aydini.modescisc.cif.service.impl.CustomerService;
 import net.aydini.modescisc.cif.service.restriction.CustomerEntityRestriction;
 import net.aydini.modescisc.cif.web.action.framework.AbstractQueryActionBean;
 import net.aydini.modescisc.cif.web.action.framework.SpringViewScope;
@@ -31,12 +31,12 @@ public class CustomerQuery extends AbstractQueryActionBean<CustomerEntity> {
      */
     private static final long serialVersionUID = 6135924579580536832L;
 
-    private final CustomerCrudService customerService;
+    private final CustomerService customerService;
 
     private CustomerFilter customerFilter = new CustomerFilter();
 
     @Autowired
-    public CustomerQuery(CustomerCrudService customerService) {
+    public CustomerQuery(CustomerService customerService) {
         this.customerService = customerService;
     }
 

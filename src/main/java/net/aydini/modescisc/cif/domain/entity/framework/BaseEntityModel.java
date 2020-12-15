@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -78,6 +80,19 @@ public abstract class BaseEntityModel extends AbstractEntityModel {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+    
+    @PrePersist
+    public void prePresist()
+    {
+        this.createdDate = new Date();
+        this.updatedDate = new Date();
+    }
+    
+    @PreUpdate
+    public void preUpdate()
+    {
+        this.updatedDate = new Date();
     }
 }
 

@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layout.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="id"
+				value="#{customerFileHeaderHome.customerFileHeaderId}"
+				converter="javax.faces.Long" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form enctype="multipart/form-data" id="fileHeaderForm"
+			prependId="false">
+			<fieldset>
+
+
+				<div class="row gutters">
+
+					<p:fileUpload
+						value="#{customerFileHeaderHome.customerInformationFile}"
+						required="true" mode="simple" styleClass="btn btn3 w3-margin"
+						allowTypes="/(\.|\/)(txt|csv)$/"
+						label="#{msgs['cif.batch.choose.file']}" sizeLimit="2048"
+						skinSimple="true" />
+
+
+				</div>
+				<div class="row gutters">
+
+					<p:commandLink value="#{msgs['cif.download.button']}" ajax="false">
+						<p:fileDownload value="#{customerFileHeaderHome.sampleFile}" />
+					</p:commandLink>
+
+				</div>
+
+
+				<h:commandButton value="#{msgs['cif.batch.process']}" id="process"
+					styleClass="button green w3-margin"
+					rendered="#{!customerFileHeaderHome.idDefined}"
+					action="#{customerFileHeaderHome.persist()}"></h:commandButton>
+
+
+				<p:button href="/secure/customerFileHeaderList.xhtml"
+					value="#{msgs['Back']}" styleClass="button secondary"></p:button>
+
+
+			</fieldset>
+
+
+		</h:form>
+
+
+		<h:form id="customerListForm">
+			<p:poll interval="1" stop="#{customerFileHeaderHome.shouldStop()}"
+				update="customerListTable" />
+
+
+			<p:dataTable var="_item" value="#{customerFileHeaderHome.details}"
+				rendered="#{customerFileHeaderHome.idDefined}"
+				rowsPerPageTemplate="2,5" dir="rtl" sortBy="#{_item.createdDate}"
+				rowIndexVar="rowId" emptyMessage="#{msgs['Empty_Datatable']}"
+				paginator="true" rows="5" id="customerListTable" lazy="true"
+				sortMode="multiple" styleClass="ui celled striped table"
+				rowStyleClass="center aligned" rowKey="#{_item.id}" reflow="true">
+
+
+				<p:column headerText="#{msgs['cif.batch.detail.data']}">
+					<h:outputText value=" #{_item.rowData}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msgs['cif.batch.error.description']}">
+					<h:outputText value=" #{_item.errorDescription}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msgs['cif.batch.status']}">
+					<h:outputText value=" #{msgs[_item.succeed]}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msgs['cif.batch.detail.rownum']}">
+					<h:outputText value="#{_item.rowNumber}"></h:outputText>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         metadata-complete="false" version="3.0">
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	metadata-complete="false" version="3.0">
 
-    <security-constraint>
+	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Allowed
 				resources</web-resource-name>
@@ -20,23 +21,22 @@
 		</web-resource-collection>
 		<auth-constraint />
 	</security-constraint>
-	
-	
-	
-	
-	<error-page>				
-    	<location>/error</location>
+
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+
+
+
+
+	<error-page>
+		<location>/error</location>
 	</error-page>
-	
-	 <!-- <security-constraint>
-        <web-resource-collection>
-        <web-resource-name>Automatic Forward to HTTPS/SSL
-        </web-resource-name>
-        <url-pattern>/*</url-pattern>
-        </web-resource-collection>
-        <user-data-constraint>
-           <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-	</security-constraint> -->
+
 
 </web-app>
