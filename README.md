@@ -2,7 +2,7 @@
 
 simple project to illustrate customer information file web application, using  spring boot, spring security, hibernate, prime faces and h2 db.
 
-## # Project Requirements
+##  Project Requirements
 
  - maven 3.5 +
  - Jdk 1.8
