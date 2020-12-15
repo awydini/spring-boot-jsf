@@ -2,7 +2,7 @@
 
 simple project to illustrate customer information file web application, using  spring boot, spring security, hibernate, prime faces and h2 db.
 
-##  Project Requirements
+##  Project requirements
 
  - maven 3.5 +
  - Jdk 1.8
@@ -30,7 +30,7 @@ simple project to illustrate customer information file web application, using  s
  - username : admin
  - password : 123
 
-## Access h2 console
+## h2db console
 
  - [Login page](http://localhost:8585/h2db)
  - JDBC URL : jdbc:h2:./cif
