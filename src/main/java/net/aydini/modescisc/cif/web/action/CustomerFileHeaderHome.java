@@ -17,8 +17,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileDetailEntity;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileHeaderEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileDetailEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileHeaderEntity;
 import net.aydini.modescisc.cif.exception.ServiceException;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
 import net.aydini.modescisc.cif.service.impl.CustomerFileDetailService;

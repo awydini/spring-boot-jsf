@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import net.aydini.modescisc.cif.dao.BaseDao;
 import net.aydini.modescisc.cif.dao.CustomerFileDetailDao;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileDetailEntity;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileHeaderEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileDetailEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileHeaderEntity;
 import net.aydini.modescisc.cif.exception.ServiceException;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
 import net.aydini.modescisc.cif.util.SpringUtils;
@@ -89,9 +89,7 @@ public class CustomerFileDetailService extends AbstractCrudService<CustomerFileD
            
         }
         
-        insert(customerFileDetailEntity);
-        flush();
-        
+        insert(customerFileDetailEntity,true);
         return customerFileDetailEntity;
     }
     

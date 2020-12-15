@@ -57,7 +57,6 @@ public class SimpleTokenizerTests {
     public void nextElementTest()
     {
         System.out.println("running test nextElementTest  "  );
-        System.out.println("=======================================================================================" );
         
         assertEquals(5,tokenizer.countTokens());
         assertEquals("2018090920200909",tokenizer.nextElement());
@@ -65,16 +64,17 @@ public class SimpleTokenizerTests {
         assertEquals("003****297",tokenizer.nextElement());
         assertEquals("13251229",tokenizer.nextElement());
         assertEquals("family",tokenizer.nextElement());
+        System.out.println("========================================OK=============================================" );
     }
 
     @Test
     public void shouldThrowNSEExceptionOnNextElement()
     {
         System.out.println("running test shouldThrowNSEExceptionOnNextElement  "  );
-        System.out.println("=======================================================================================" );
         for (int i = 0 ; i < tokenizer.countTokens() ; i++)
             tokenizer.nextElement();
         assertThrows(NoSuchElementException.class,()->tokenizer.nextElement());
+        System.out.println("========================================OK=============================================" );
     }
 
 
@@ -83,22 +83,22 @@ public class SimpleTokenizerTests {
     {
 
         System.out.println("running test tokenNamesTest  "  );
-        System.out.println("=======================================================================================" );
         tokenizer.setNames(names);
         assertEquals("2018090920200909",tokenizer.getStringToken(Names.FROM_TO.name()));
         assertEquals("13251229",tokenizer.getStringToken(Names.BIRTH_DATE.name()));
         assertEquals("family",tokenizer.getStringToken(Names.FAMILY.name()));
         assertEquals("20190811",tokenizer.getStringToken(Names.DEATH_DATE.name()));
         assertEquals("003****297",tokenizer.getStringToken(Names.MASKED_NATIONAL_CODE.name()));
+        System.out.println("========================================OK=============================================" );
     }
 
     @Test
     public void shouldThrowsNSEExceptionOnNoneExistingToken()
     {
         System.out.println("running test shouldThrowsNSEExceptionOnNoneExistingToken  "  );
-        System.out.println("=======================================================================================" );
         tokenizer.setNames(names);
         assertThrows(NoSuchElementException.class,()->tokenizer.getStringToken("none"));
+        System.out.println("========================================OK=============================================" );
     }
 
 
@@ -107,8 +107,8 @@ public class SimpleTokenizerTests {
     public void nullAndEmptyInputConstructorTest(String arg)
     {
         System.out.println("running test nullAndEmptyInputConstructorTest  "  );
-        System.out.println("=======================================================================================" );
         assertThrows(NullPointerException.class,()->new SimpleTokenizer(arg));
+        System.out.println("========================================OK=============================================" );
     }
 
 
@@ -116,12 +116,12 @@ public class SimpleTokenizerTests {
     public void shouldHaveMoreElementsTest()
     {
         System.out.println("running test shouldHaveMoreElementsTest  "  );
-        System.out.println("=======================================================================================" );
         for(int i = 0 ; i < tokenizer.countTokens() ; i++)
         {
             assertTrue(tokenizer.hasMoreElements());
             tokenizer.nextElement();
         }
         assertFalse(tokenizer.hasMoreElements());
+        System.out.println("========================================OK=============================================" );
     }
 }

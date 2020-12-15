@@ -8,11 +8,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
 import net.aydini.modescisc.cif.dao.BaseDao;
 import net.aydini.modescisc.cif.dao.CustomerFileHeaderDao;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileDetailEntity;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileHeaderEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileDetailEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileHeaderEntity;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
 
 /**
@@ -23,7 +22,6 @@ import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
  */
 
 
-@Slf4j
 @Service
 public class CustomerFileHeaderService extends AbstractCrudService<CustomerFileHeaderEntity>
 {
@@ -56,7 +54,8 @@ public class CustomerFileHeaderService extends AbstractCrudService<CustomerFileH
     {
         List<CustomerFileDetailEntity> customerFileDetails = customerFileDetailService.processCustomerFile(customerFileHeaderEntity);
         customerFileHeaderEntity.setProcessDate(new Date());
-        customerFileHeaderEntity.setTotalRow(customerFileDetails != null ? customerFileDetails.size() : 0);
+        customerFileHeaderEntity.setTotalRow(customerFileDetails != null ? Long.valueOf(customerFileDetails.size()) : 0l);
+        customerFileHeaderEntity.setSuccessRecordCount(customerFileDetails.stream().filter(item->item.getCustomerEntity() != null).count());
         update(customerFileHeaderEntity);
     }
 }

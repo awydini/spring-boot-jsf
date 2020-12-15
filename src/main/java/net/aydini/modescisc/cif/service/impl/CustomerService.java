@@ -1,5 +1,8 @@
 package net.aydini.modescisc.cif.service.impl;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
@@ -11,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.aydini.modescisc.cif.dao.BaseDao;
 import net.aydini.modescisc.cif.dao.CustomerDao;
 import net.aydini.modescisc.cif.domain.CustomerFileHeaderTitle;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerEntity;
 import net.aydini.modescisc.cif.exception.CustomerValidationException;
 import net.aydini.modescisc.cif.exception.ServiceException;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
@@ -84,11 +87,10 @@ public class CustomerService extends AbstractCrudService<CustomerEntity>
     {
         try
         {
-            SimpleLineMapper<CustomerEntity> mapper = new SimpleLineMapper<CustomerEntity>(new CustomerDtoMapper());
+            SimpleLineMapper<CustomerEntity> mapper = new SimpleLineMapper<CustomerEntity>(new CustomerEntityMapper());
             SimpleTokenizer tokenizer = getSimpleTokenizer(line);
             CustomerEntity customerEntity = mapper.map(tokenizer);
             insert(customerEntity);
-            flush();
             return customerEntity;
         }
         catch (ServiceException e)
@@ -116,11 +118,8 @@ public class CustomerService extends AbstractCrudService<CustomerEntity>
 
     private String[] getCustomerFileHeaderTitle()
     {
-        int arrayLength = CustomerFileHeaderTitle.values().length;
-        String[] headers = new String[arrayLength];
-        for (int i = 0; i < arrayLength; i++)
-            headers[i] = CustomerFileHeaderTitle.values()[i].name();
-        return headers;
+        String[] headers = new String[CustomerFileHeaderTitle.values().length];
+        return Stream.of(CustomerFileHeaderTitle.values()).map(item->item.name()).collect(Collectors.toList()).toArray(headers);
     }
 
 }

@@ -5,9 +5,8 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.ghasemkiani.util.icu.PersianCalendar;
-
 import net.aydini.modescisc.cif.exception.ServiceException;
+import net.aydini.modescisc.cif.util.JalaliCalendar.YearMonthDate;
 
 /**
  * 
@@ -32,15 +31,19 @@ public class PersianDateUtils
         return persianDateUtils;
     }
 
-    public PersianCalendar getCalandar(Date date)
+    public JalaliCalendar getCalandar(Date date)
     {
-        return new PersianCalendar(new Date());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        YearMonthDate yearMonthDate = new YearMonthDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
+        yearMonthDate = JalaliCalendar.gregorianToJalali(yearMonthDate);
+        return getCalandar(yearMonthDate.getYear(),yearMonthDate.getMonth(),yearMonthDate.getDate());
 
     }
 
-    public PersianCalendar getCalandar(int year, int month, int day)
+    public JalaliCalendar getCalandar(int year, int month, int day)
     {
-        return new PersianCalendar(year, month, day);
+        return new JalaliCalendar(year, month, day);
 
     }
 
@@ -48,8 +51,8 @@ public class PersianDateUtils
     {
         if (jalaliDate == null) return null;
         if (delimiter != null) jalaliDate = jalaliDate.replaceAll(delimiter, "");
-        if (jalaliDate.length() != STANDARD_PERSIAN_DATE_LENTH) throw new ServiceException("invalid length", jalaliDate);
-        if (!StringUtils.isNumeric(jalaliDate)) throw new ServiceException("invalid input", jalaliDate);
+        if (jalaliDate.length() != STANDARD_PERSIAN_DATE_LENTH) throw new ServiceException("invalid date", jalaliDate);
+        if (!StringUtils.isNumeric(jalaliDate)) throw new ServiceException("invalid date", jalaliDate);
 
         int year = Integer.parseInt(jalaliDate.substring(0, 4));
         int month = Integer.parseInt(jalaliDate.substring(4, 6))-1;
@@ -59,10 +62,6 @@ public class PersianDateUtils
 
     }
 
-    private PersianCalendar getPersianCalendar(Date date)
-    {
-        return new PersianCalendar(new Date());
-    }
 
     public String getPersianDate(Date date)
     {
@@ -73,11 +72,14 @@ public class PersianDateUtils
 
     private String toString(Date date)
     {
-        PersianCalendar calendar = getPersianCalendar(date);
+        JalaliCalendar calendar = getCalandar(date);
         StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(calendar.get(Calendar.YEAR)).append("-").append(calendar.get(Calendar.MONTH) + 1).append("-")
-                .append(calendar.get(Calendar.DAY_OF_MONTH)).toString();
-
+        String month = StringUtils.leftPad(String.valueOf(calendar.get(Calendar.MONTH) +1), 2,"0");
+        String day = StringUtils.leftPad(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)), 2,"0");
+        return stringBuilder.append(calendar.get(Calendar.YEAR)).append("-").append(month).append("-")
+                .append(day).toString();
     }
+    
+    
 
 }

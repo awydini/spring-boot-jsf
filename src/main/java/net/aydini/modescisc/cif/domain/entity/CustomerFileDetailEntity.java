@@ -1,4 +1,4 @@
-package net.aydini.modescisc.cif.domain.entity.cif;
+package net.aydini.modescisc.cif.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

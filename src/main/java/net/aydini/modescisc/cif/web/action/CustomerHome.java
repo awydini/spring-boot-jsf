@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 import net.aydini.modescisc.cif.domain.Gender;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerEntity;
 import net.aydini.modescisc.cif.exception.ServiceException;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
 import net.aydini.modescisc.cif.service.impl.CustomerService;

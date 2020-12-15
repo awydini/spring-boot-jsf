@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import net.aydini.modescisc.cif.domain.dto.filter.CustomerFilter;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerEntity;
 import net.aydini.modescisc.cif.service.framework.AbstractCrudService;
 import net.aydini.modescisc.cif.service.framework.JPARestriction;
 import net.aydini.modescisc.cif.service.impl.CustomerService;

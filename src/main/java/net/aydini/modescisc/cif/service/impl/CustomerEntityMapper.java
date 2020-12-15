@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import net.aydini.modescisc.cif.domain.CustomerFileHeaderTitle;
 import net.aydini.modescisc.cif.domain.Gender;
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerEntity;
 import net.aydini.modescisc.cif.exception.CustomerValidationException;
 import net.aydini.modescisc.cif.exception.ServiceException;
 import net.aydini.modescisc.cif.service.framework.Mapper;
@@ -21,7 +21,7 @@ import net.aydini.modescisc.cif.util.SimpleTokenizer;
  */
 
 @Slf4j
-public class CustomerDtoMapper implements Mapper<SimpleTokenizer, CustomerEntity>
+public class CustomerEntityMapper implements Mapper<SimpleTokenizer, CustomerEntity>
 {
 
     @Override

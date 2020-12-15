@@ -3,7 +3,7 @@ package net.aydini.modescisc.cif.dao;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerEntity;
 
 /**
  * 

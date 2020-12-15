@@ -1,4 +1,4 @@
-package net.aydini.modescisc.cif.domain.entity.cif;
+package net.aydini.modescisc.cif.domain.entity;
 
 import java.util.Date;
 
@@ -43,11 +43,13 @@ public class CustomerFileHeaderEntity extends BaseEntityModel
     @Basic(fetch = FetchType.LAZY)
     private byte[] fileContent; 
     
-    private Integer totalRow;
+    private Long totalRow;
     
     private String fileName;
     
-    private Date processDate; 
+    private Date processDate;
+    
+    private Long successRecordCount;
     
     
     public boolean isProcessed()

@@ -1,6 +1,6 @@
 package net.aydini.modescisc.cif.dao;
 
-import net.aydini.modescisc.cif.domain.entity.cif.CustomerFileHeaderEntity;
+import net.aydini.modescisc.cif.domain.entity.CustomerFileHeaderEntity;
 
 /**
  * 

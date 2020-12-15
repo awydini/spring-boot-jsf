@@ -62,10 +62,10 @@ public class NationalCodeValidatorTests
     public void shouldThrowNationalCodValidationExcrptionForInvalid(String invalidNationalCode)
     {
         System.out.println("running test shouldThrowNationalCodValidationExcrptionForInvalid with argument " + invalidNationalCode );
-        System.out.println("=======================================================================================" );
         
         when(customerDao.countNationalCode(invalidNationalCode, null)).thenReturn(0l);
         assertThrows(NationalCodeValidationException.class, ()->nationalCodeValidatorService.validate(invalidNationalCode, null));
+        System.out.println("========================================OK=============================================" );
     }
     
     @ParameterizedTest
@@ -73,10 +73,10 @@ public class NationalCodeValidatorTests
     public void shouldThrowNationalCodValidationExcrptionForNullNationalCode(String  nationalCode)
     {
         System.out.println("running test shouldThrowNationalCodValidationExcrptionForNullNationalCode with argument " + nationalCode );
-        System.out.println("=======================================================================================" );
         
         when(customerDao.countNationalCode(nationalCode, null)).thenReturn(0l);
         assertThrows(NationalCodeValidationException.class, ()->nationalCodeValidatorService.validate(nationalCode, null));
+        System.out.println("========================================OK=============================================" );
     }
     
     @Test
@@ -84,12 +84,12 @@ public class NationalCodeValidatorTests
     {
         final String  validNationalCode="0891121048";
         System.out.println("running test shouldThrowNationalCodValidationExcrptionForDuplicateNationalCode with argument  " + validNationalCode  );
-        System.out.println("=======================================================================================" );
         
         when(customerDao.countNationalCode(validNationalCode, 1l)).thenReturn(1l);
         assertThrows(NationalCodeValidationException.class, 
                 ()->nationalCodeValidatorService.validate(validNationalCode, 1l)
                 ,NationalCodeValidationException.NATIONAL_CODE_IS_DUPLICATED);
+        System.out.println("========================================OK=============================================" );
         
     }
 
