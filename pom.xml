@@ -239,11 +239,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>com.mupra.app</groupId>
-			<artifactId>common-lib</artifactId>
-			<version>0.0.2</version>
-		</dependency>
+
 
 		<dependency>
 			<groupId>org.jboss.aerogear</groupId>
