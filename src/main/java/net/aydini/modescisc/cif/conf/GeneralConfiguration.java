@@ -89,26 +89,7 @@ public class GeneralConfiguration {
         return prettyFilter;
     }
 
-    @Bean
-    public FilterRegistrationBean characterEncodingFilter()
-    {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new CharacterEncodingFilter("UTF-8", true, true));
-        registration.addUrlPatterns("/*");
-        registration.setName("characterEncodingFilter");
-        return registration;
-    }
 
-    @Bean
-    public FilterRegistrationBean fileUploadFilter()
-    {
-
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new FileUploadFilter());
-        registration.setServletNames(Arrays.asList("Faces Servlet"));
-        registration.setName("fileUploadFilter");
-        return registration;
-    }
 
 
 

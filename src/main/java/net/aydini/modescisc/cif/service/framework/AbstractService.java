@@ -83,14 +83,7 @@ public abstract class AbstractService<E extends BaseEntityModel>
                 }
             }
 
-            if (CollectionUtils.isEmpty(orders))
-            {
-                return null;
-            }
-            else
-            {
-                return new Sort(orders);
-            }
+            return null;
         }
     }
 
