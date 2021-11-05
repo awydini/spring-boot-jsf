@@ -1,12 +1,12 @@
 # Cif Application
 
-simple project to illustrate customer information file web application, using  spring boot, spring security, hibernate, prime faces and h2 db.
+simple project to illustrate "customer information file" web application, using  spring boot, spring security, Hibernate, prime faces and h2 db.
 
 ##  Project requirements
 
  - maven 3.5 +
- - Jdk 1.8
- - spring boot 2.0.0
+ - Jdk 11
+ - spring boot 2.5.5
  - prime face 6.2
  - h2 db
  - junit 5
