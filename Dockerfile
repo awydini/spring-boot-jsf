@@ -4,10 +4,15 @@ FROM maven
 WORKDIR /app
 
 
+COPY pom.xml /app
+
+RUN mvn clean install
+
 COPY . /app
 
 
-RUN mvn clean install -DskipTests=true
+RUN mvn package
+
 
 EXPOSE 8080
 
